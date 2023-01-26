@@ -14,11 +14,16 @@ public class ShopService {
         this.itemsStorage = itemsStorage;
     }
 
+    public List<Item> getAllItems()
+    {
+        return itemsStorage.getItemsList();
+    }
+
     public void orderItems(Cart cart){
         List<Item> itemsInShop = itemsStorage.getItemsList();
         List<String> itemsInCart = cart.getItemsInCartList();
         Customer customer = cart.getCustomer();
-        double saldo = cart.getCustomer().getSaldo();
+        double saldo = customer.getSaldo();
         double sum = 0d;
 
         for (String itemInCart : itemsInCart) {
@@ -36,11 +41,11 @@ public class ShopService {
         {
             double newSaldo = saldo - sum;
             customer.setSaldo(newSaldo);
-            System.out.println("Sukces, udane zakupy. Cena za zakupy : " + sum + " pozostałe saldo " + newSaldo);
+            System.out.println("Sukces, udane zakupy. Cena za zakupy: " + sum + " pozostałe saldo " + newSaldo);
         }
         else
         {
-            System.out.println("Nieudane zakupy. Masz za mało pieniędzy. Saldo - " + saldo + " cena - " + sum );
+            System.out.println("Nieudane zakupy. Masz za mało pieniędzy. Saldo: " + saldo + " cena: " + sum );
         }
     }
 
